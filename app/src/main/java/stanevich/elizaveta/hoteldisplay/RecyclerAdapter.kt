@@ -27,9 +27,9 @@ class RecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerAdapt
         holder.tvHotelName.text = hotelList[position].name
         holder.tvAddressHotel.text = hotelList[position].address
         holder.tvStarsHotel.text = hotelList[position].stars.toString()
-        Glide.with(context).load(hotelList[position].image)
-            .apply(RequestOptions().centerCrop())
-            .into(holder.image)
+//        Glide.with(context).load(hotelList[position].image)
+//            .apply(RequestOptions().centerCrop())
+//            .into(holder.image)
     }
 
     fun setHotelListItems(hotelList: List<Hotel>){
@@ -41,7 +41,7 @@ class RecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerAdapt
         val tvHotelName: TextView = itemView!!.findViewById(R.id.nameOfHotel)
         val tvAddressHotel: TextView = itemView!!.findViewById(R.id.addressOfHotel)
         val tvStarsHotel: TextView = itemView!!.findViewById(R.id.starsOfHotel)
-        val image: ImageView = itemView!!.findViewById(R.id.ivHotel)
+//        val image: ImageView = itemView!!.findViewById(R.id.ivHotel)
 
     }
 }
