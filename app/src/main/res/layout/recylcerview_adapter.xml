@@ -18,7 +18,7 @@
                 android:orientation="horizontal">
 
             <ImageView
-                    android:id="@+id/iv"
+                    android:id="@+id/ivHotel"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="10dp"
@@ -33,7 +33,7 @@
                     android:orientation="vertical">
 
                 <TextView
-                        android:id="@+id/name"
+                        android:id="@+id/nameOfHotel"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginTop="5dp"
@@ -41,14 +41,14 @@
                         android:text="@string/nameOfHotel"/>
 
                 <TextView
-                        android:id="@+id/address"
+                        android:id="@+id/addressOfHotel"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="@string/addressHotel"/>
 
                 <TextView
-                        android:id="@+id/stars"
+                        android:id="@+id/starsOfHotel"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
