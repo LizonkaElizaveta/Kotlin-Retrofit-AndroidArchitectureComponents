@@ -25,7 +25,6 @@ class HotelListFragment : Fragment() {
         }
     }
 
-    //3
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,14 +38,13 @@ class HotelListFragment : Fragment() {
         val activity = activity as Context
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-
         val apiInterface = ApiHostelInterface.create()
 
         apiInterface.getHotels(hotelListName).enqueue(object : Callback<Set<Hotel>> {
             override fun onResponse(call: Call<Set<Hotel>>?, response: Response<Set<Hotel>>?) {
 
                 if (response?.body() != null) {
-                    recyclerAdapter.setHotelListItems(response.body()!!)
+                    recyclerAdapter.addHotelListItems(response.body()!!)
                     recyclerAdapter.notifyDataSetChanged()
                 }
             }

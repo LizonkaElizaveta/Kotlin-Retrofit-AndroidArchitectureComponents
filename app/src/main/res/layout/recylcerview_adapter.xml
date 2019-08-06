@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        xmlns:tools="http://schemas.android.com/tools" android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
@@ -30,21 +30,21 @@
                         android:layout_height="0dp"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:text="@string/nameOfHotel"/>
+                        tools:text="@string/nameOfHotel"/>
 
                 <TextView
                         android:id="@+id/addressOfHotel"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="@string/addressHotel"/>
+                        tools:text="@string/addressHotel"/>
 
-                <TextView
+                <RatingBar
                         android:id="@+id/starsOfHotel"
+                        style="?android:attr/ratingBarStyleIndicator"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/starsOfHotel"/>
+                        android:layout_height="wrap_content"/>
+
 
             </LinearLayout>
         </LinearLayout>

@@ -3,4 +3,6 @@
     <string name="nameOfHotel">Belleclaire Hotel</string>
     <string name="addressHotel">250 West 77th Street, Manhattan</string>
     <string name="starsOfHotel">3.0</string>
+    <string name="suites_availability">Available rooms:</string>
+    <string name="distance">distance</string>
 </resources>

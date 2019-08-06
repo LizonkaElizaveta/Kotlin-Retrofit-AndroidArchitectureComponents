@@ -3,6 +3,7 @@ package stanevich.elizaveta.hoteldisplay
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -24,17 +25,17 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
         val hotel = hotelList[position]
         holder.tvHotelName.text = hotel.name
         holder.tvAddressHotel.text = hotel.address
-        holder.tvStarsHotel.text = hotel.stars.toString()
+        holder.tvStarsHotel.rating = hotel.stars
     }
 
-    fun setHotelListItems(hotelList: Collection<Hotel>) {
+    fun addHotelListItems(hotelList: Collection<Hotel>) {
         this.hotelList.addAll(hotelList)
     }
 
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val tvHotelName: TextView = itemView!!.findViewById(R.id.nameOfHotel)
         val tvAddressHotel: TextView = itemView!!.findViewById(R.id.addressOfHotel)
-        val tvStarsHotel: TextView = itemView!!.findViewById(R.id.starsOfHotel)
+        val tvStarsHotel: RatingBar = itemView!!.findViewById(R.id.starsOfHotel)
     }
 
 
