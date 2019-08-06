@@ -18,6 +18,7 @@
                 android:orientation="horizontal">
 
             <ImageView
+                    android:src="@drawable/ic_photo_black_24dp"
                     android:id="@+id/ivHotel"
                     android:layout_width="100dp"
                     android:layout_height="100dp"

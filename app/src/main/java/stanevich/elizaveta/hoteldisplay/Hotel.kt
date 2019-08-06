@@ -5,7 +5,6 @@ data class Hotel(
     var address: String,
     var stars: Float,
     var distance: Float,
-    var suites_availability: String
-//    var image: String
-) {
-}
+    var suites_availability: String,
+    var image: String?
+)
