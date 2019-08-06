@@ -11,6 +11,9 @@ interface ApiHostelInterface {
     @GET("{name}")
     fun getHotels(@Path("name") name: String): Call<Set<Hotel>>
 
+    @GET("{id}.json")
+    fun getHotelById(@Path("id") id: String): Call<Hotel>
+
     companion object {
 
         var URL = "https://raw.githubusercontent.com/iMofas/ios-android-test/master/"
