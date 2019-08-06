@@ -17,15 +17,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <ImageView
-                    android:src="@drawable/ic_photo_black_24dp"
-                    android:id="@+id/ivHotel"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:scaleType="fitXY"/>
-
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
