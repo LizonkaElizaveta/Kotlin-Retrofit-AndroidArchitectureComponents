@@ -14,6 +14,7 @@ class RecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerAdapt
 
     var hotelList : List<Hotel> = listOf()
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recylcerview_adapter,parent,false)
         return MyViewHolder(view)
@@ -34,7 +35,7 @@ class RecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerAdapt
 
     fun setHotelListItems(hotelList: List<Hotel>){
         this.hotelList = hotelList
-        val filteredHotelNames = hotelList.filter { it.name == "123" }.map { hotel -> hotel.name }
+
         notifyDataSetChanged()
     }
 
