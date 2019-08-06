@@ -33,7 +33,8 @@ class RecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerAdapt
     }
 
     fun setHotelListItems(hotelList: List<Hotel>){
-        this.hotelList = hotelList;
+        this.hotelList = hotelList
+        val filteredHotelNames = hotelList.filter { it.name == "123" }.map { hotel -> hotel.name }
         notifyDataSetChanged()
     }
 

@@ -24,9 +24,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = recyclerAdapter
 
 
-        val apiInterface = ApiInterface.create().getHotels()
+        val apiInterface = ApiHostelInterface.create().getHotels()
 
-        //apiInterface.enqueue( Callback<List<Movie>>())
+        val apiGitHubInterface = ApiGitHubInterface.create().getDescriptionFile()
+
+
+
         apiInterface.enqueue( object : Callback<List<Hotel>> {
             override fun onResponse(call: Call<List<Hotel>>?, response: Response<List<Hotel>>?) {
 
