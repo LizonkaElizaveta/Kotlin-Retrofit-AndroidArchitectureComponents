@@ -53,6 +53,19 @@ class HotelListFragment : Fragment() {
                 Log.e("Fail", t?.message)
             }
         })
+
+        if (context is OnHotelSelected) {
+            recyclerAdapter.listener = context as OnHotelSelected
+        } else {
+            throw ClassCastException(
+                context.toString() + " must implement OnHotelSelected."
+            )
+        }
         return view
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
     }
 }

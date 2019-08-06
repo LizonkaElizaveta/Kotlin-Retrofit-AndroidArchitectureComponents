@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+class RecyclerAdapter(var listener: OnHotelSelected? = null) : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     private var hotelList: ArrayList<Hotel> = arrayListOf()
 
@@ -26,6 +26,9 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
         holder.tvHotelName.text = hotel.name
         holder.tvAddressHotel.text = hotel.address
         holder.tvStarsHotel.rating = hotel.stars
+        holder.itemView.setOnClickListener {
+            listener?.onHotelSelected(hotel)
+        }
     }
 
     fun addHotelListItems(hotelList: Collection<Hotel>) {
