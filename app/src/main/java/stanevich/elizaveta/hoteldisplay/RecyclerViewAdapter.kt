@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
 
-class RecyclerAdapter(var listener: OnHotelSelected? = null) : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+class RecyclerViewAdapter(var listener: OnHotelSelected? = null) :
+    RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
-    private var hotelList: ArrayList<Hotel> = arrayListOf()
+    private var hotelPropertyList: ArrayList<HotelProperty> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recylcerview_adapter, parent, false)
@@ -18,11 +20,11 @@ class RecyclerAdapter(var listener: OnHotelSelected? = null) : RecyclerView.Adap
     }
 
     override fun getItemCount(): Int {
-        return hotelList.size
+        return hotelPropertyList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val hotel = hotelList[position]
+        val hotel = hotelPropertyList[position]
         holder.tvHotelName.text = hotel.name
         holder.tvAddressHotel.text = hotel.address
         holder.tvStarsHotel.rating = hotel.stars
@@ -31,8 +33,13 @@ class RecyclerAdapter(var listener: OnHotelSelected? = null) : RecyclerView.Adap
         }
     }
 
-    fun addHotelListItems(hotelList: Collection<Hotel>) {
-        this.hotelList.addAll(hotelList)
+    fun addHotelListItems(hotelPropertyList: Collection<HotelProperty>) {
+        this.hotelPropertyList.addAll(hotelPropertyList)
+    }
+
+    fun sort(asc: Boolean) {
+        hotelPropertyList.sortBy { it.distance }
+        notifyDataSetChanged()
     }
 
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {

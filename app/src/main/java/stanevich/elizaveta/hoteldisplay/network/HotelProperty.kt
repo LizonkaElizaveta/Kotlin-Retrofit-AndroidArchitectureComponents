@@ -1,6 +1,6 @@
-package stanevich.elizaveta.hoteldisplay
+package stanevich.elizaveta.hoteldisplay.network
 
-data class Hotel(
+data class HotelProperty(
     var id: String,
     var name: String,
     var address: String,

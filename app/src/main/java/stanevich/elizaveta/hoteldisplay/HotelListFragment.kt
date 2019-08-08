@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import stanevich.elizaveta.hoteldisplay.network.ApiHotelInterface
+import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
 class HotelListFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
-    lateinit var recyclerAdapter: RecyclerAdapter
-    var hotelListName = "0777.json"
+    lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    var hotelListName = "0655.json"
 
     companion object {
         fun newInstance(): HotelListFragment {
@@ -25,37 +27,33 @@ class HotelListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hotel_list, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerview)
-        recyclerAdapter = RecyclerAdapter()
-        recyclerView.adapter = recyclerAdapter
+        recyclerViewAdapter = RecyclerViewAdapter()
+        recyclerView.adapter = recyclerViewAdapter
         val activity = activity as Context
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        val apiInterface = ApiHostelInterface.create()
+        val apiInterface = ApiHotelInterface.create()
 
-        apiInterface.getHotels(hotelListName).enqueue(object : Callback<Set<Hotel>> {
-            override fun onResponse(call: Call<Set<Hotel>>?, response: Response<Set<Hotel>>?) {
+        apiInterface.getHotels(hotelListName).enqueue(object : Callback<List<HotelProperty>> {
+            override fun onResponse(call: Call<List<HotelProperty>>?, response: Response<List<HotelProperty>>?) {
 
                 if (response?.body() != null) {
-                    recyclerAdapter.addHotelListItems(response.body()!!)
-                    recyclerAdapter.notifyDataSetChanged()
+                    recyclerViewAdapter.addHotelListItems(response.body()!!)
+                    recyclerViewAdapter.notifyDataSetChanged()
                 }
             }
 
-            override fun onFailure(call: Call<Set<Hotel>>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<HotelProperty>>?, t: Throwable?) {
                 Log.e("Fail", t?.message)
             }
         })
 
         if (context is OnHotelSelected) {
-            recyclerAdapter.listener = context as OnHotelSelected
+            recyclerViewAdapter.listener = context as OnHotelSelected
         } else {
             throw ClassCastException(
                 context.toString() + " must implement OnHotelSelected."
@@ -64,8 +62,4 @@ class HotelListFragment : Fragment() {
         return view
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-    }
 }

@@ -1,4 +1,4 @@
-package stanevich.elizaveta.hoteldisplay
+package stanevich.elizaveta.hoteldisplay.detail
 
 import android.os.Bundle
 import android.util.Log
@@ -13,23 +13,23 @@ import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import stanevich.elizaveta.hoteldisplay.R
+import stanevich.elizaveta.hoteldisplay.network.ApiHotelInterface
+import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
-class HotelDescriptionFragment(var hotel: Hotel) : Fragment() {
+class DetailFragment(var hotelProperty: HotelProperty) : Fragment() {
 
 
     companion object {
-        fun newInstance(hotel: Hotel): HotelDescriptionFragment {
-            return HotelDescriptionFragment(hotel)
+        fun newInstance(hotelProperty: HotelProperty): DetailFragment {
+            return DetailFragment(hotelProperty)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         val view = inflater.inflate(R.layout.fragment_hotel_description, container, false)
-        val apiInterface = ApiHostelInterface.create()
+        val apiInterface = ApiHotelInterface.create()
         val nameOfHotel = view.findViewById<TextView>(R.id.nameOfHotel)
         val imageHotel = view.findViewById<ImageView>(R.id.imageHotel)
         val addressOfHotel = view.findViewById<TextView>(R.id.addressOfHotel)
@@ -37,14 +37,18 @@ class HotelDescriptionFragment(var hotel: Hotel) : Fragment() {
         val starsOfHotel = view.findViewById<RatingBar>(R.id.starsOfHotel)
         val suitesAvailability = view.findViewById<TextView>(R.id.suites_availability)
 
-        apiInterface.getHotelById(hotel.id).enqueue(object : Callback<Hotel> {
-            override fun onResponse(call: Call<Hotel>?, response: Response<Hotel>?) {
+        apiInterface.getHotelById(hotelProperty.id).enqueue(object : Callback<HotelProperty> {
+            override fun onResponse(call: Call<HotelProperty>?, response: Response<HotelProperty>?) {
 
                 if (response?.body() != null) {
                     val hotel = response.body()!!
                     nameOfHotel.text = hotel.name
                     Glide.with(context)
                         .load("https://raw.githubusercontent.com/iMofas/ios-android-test/master/" + hotel.image)
+//                        .apply(
+//                            RequestOptions()
+//                                .placeholder(R.drawable.loading_animation)
+//                                .error(R.drawable.ic_broken_image))
                         .into(imageHotel)
                     addressOfHotel.text = hotel.address
                     distance.text = hotel.distance.toString()
@@ -53,7 +57,7 @@ class HotelDescriptionFragment(var hotel: Hotel) : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Hotel>?, t: Throwable?) {
+            override fun onFailure(call: Call<HotelProperty>?, t: Throwable?) {
                 Log.e("Fail", t?.message)
             }
         })
