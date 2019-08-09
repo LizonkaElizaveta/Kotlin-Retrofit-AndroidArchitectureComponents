@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 class HotelListFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
+    private lateinit var progress: ContentLoadingProgressBar
     lateinit var recyclerViewAdapter: RecyclerViewAdapter
     var hotelListName = "0655.json"
 
@@ -32,7 +35,8 @@ class HotelListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hotel_list, container, false)
-
+        progress = view.findViewById(R.id.progressBar)
+        progress.show()
         recyclerView = view.findViewById(R.id.recyclerview)
         recyclerViewAdapter = RecyclerViewAdapter()
         recyclerView.adapter = recyclerViewAdapter
@@ -45,12 +49,15 @@ class HotelListFragment : Fragment() {
             override fun onResponse(call: Call<List<HotelProperty>>?, response: Response<List<HotelProperty>>?) {
 
                 if (response?.body() != null) {
+                    progress.hide()
                     recyclerViewAdapter.addHotelListItems(response.body()!!)
                     recyclerViewAdapter.notifyDataSetChanged()
                 }
             }
 
             override fun onFailure(call: Call<List<HotelProperty>>?, t: Throwable?) {
+                progress.hide()
+                Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
                 Log.e("Fail", t?.message)
             }
         })

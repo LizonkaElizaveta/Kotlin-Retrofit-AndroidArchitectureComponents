@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_hotel_list.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +31,7 @@ class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
         val binding: FragmentHotelDescriptionBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_hotel_description, container, false)
         val apiInterface = ApiHotelInterface.create()
+        binding.progressBar.show()
         apiInterface.getHotelById(hotelProperty.id).enqueue(object : Callback<HotelProperty> {
             override fun onResponse(call: Call<HotelProperty>?, response: Response<HotelProperty>?) {
                 response?.let { res ->
@@ -37,13 +40,26 @@ class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
                         bindResponse(binding, it)
                     }
                 }
+                setViewsVisible(binding)
+                progressBar.hide()
             }
 
             override fun onFailure(call: Call<HotelProperty>?, t: Throwable?) {
+                Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
                 Log.e("Fail", t?.message!!)
+                progressBar.hide()
             }
         })
         return binding.root
+    }
+
+    private fun setViewsVisible(binding: FragmentHotelDescriptionBinding) {
+        binding.apply {
+            tvDistance.visibility = View.VISIBLE
+            tvRooms.visibility = View.VISIBLE
+            additionalInf.visibility = View.VISIBLE
+            starsOfHotel.visibility = View.VISIBLE
+        }
     }
 
     private fun bindResponse(binding: FragmentHotelDescriptionBinding, hotel: HotelProperty) {
