@@ -5,15 +5,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import stanevich.elizaveta.hoteldisplay.detail.DetailFragment
+import stanevich.elizaveta.hoteldisplay.detail.HotelDescriptionFragment
+import stanevich.elizaveta.hoteldisplay.detail.OnHotelSelected
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
+import stanevich.elizaveta.hoteldisplay.overview.HotelListFragment
 
 
 class MainActivity : AppCompatActivity(), OnHotelSelected {
 
     override fun onHotelSelected(hotelProperty: HotelProperty) {
         val detailsFragment =
-            DetailFragment.newInstance(hotelProperty)
+            HotelDescriptionFragment.newInstance(hotelProperty)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.root_layout, detailsFragment, "hotelDetails")
@@ -25,12 +27,15 @@ class MainActivity : AppCompatActivity(), OnHotelSelected {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.root_layout, HotelListFragment.newInstance(), "hotelList")
                 .commit()
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,4 +53,6 @@ class MainActivity : AppCompatActivity(), OnHotelSelected {
     private fun toast(length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, R.string.distance, length).show()
     }
+
+
 }

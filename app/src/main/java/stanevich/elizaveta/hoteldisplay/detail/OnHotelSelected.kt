@@ -1,4 +1,4 @@
-package stanevich.elizaveta.hoteldisplay
+package stanevich.elizaveta.hoteldisplay.detail
 
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 

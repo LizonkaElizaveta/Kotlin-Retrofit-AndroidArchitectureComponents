@@ -1,4 +1,4 @@
-package stanevich.elizaveta.hoteldisplay
+package stanevich.elizaveta.hoteldisplay.overview
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import stanevich.elizaveta.hoteldisplay.R
+import stanevich.elizaveta.hoteldisplay.RecyclerViewAdapter
+import stanevich.elizaveta.hoteldisplay.detail.OnHotelSelected
 import stanevich.elizaveta.hoteldisplay.network.ApiHotelInterface
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
@@ -62,4 +65,6 @@ class HotelListFragment : Fragment() {
         return view
     }
 
+
 }
+

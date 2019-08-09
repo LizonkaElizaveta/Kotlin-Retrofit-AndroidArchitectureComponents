@@ -17,12 +17,13 @@ import stanevich.elizaveta.hoteldisplay.R
 import stanevich.elizaveta.hoteldisplay.network.ApiHotelInterface
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
-class DetailFragment(var hotelProperty: HotelProperty) : Fragment() {
-
+class HotelDescriptionFragment(var hotelProperty: HotelProperty) : Fragment() {
 
     companion object {
-        fun newInstance(hotelProperty: HotelProperty): DetailFragment {
-            return DetailFragment(hotelProperty)
+        private const val BASE_URL = "https://raw.githubusercontent.com/iMofas/ios-android-test/master/"
+
+        fun newInstance(hotelProperty: HotelProperty): HotelDescriptionFragment {
+            return HotelDescriptionFragment(hotelProperty)
         }
     }
 
@@ -43,12 +44,8 @@ class DetailFragment(var hotelProperty: HotelProperty) : Fragment() {
                 if (response?.body() != null) {
                     val hotel = response.body()!!
                     nameOfHotel.text = hotel.name
-                    Glide.with(context)
-                        .load("https://raw.githubusercontent.com/iMofas/ios-android-test/master/" + hotel.image)
-//                        .apply(
-//                            RequestOptions()
-//                                .placeholder(R.drawable.loading_animation)
-//                                .error(R.drawable.ic_broken_image))
+                    Glide.with(context!!)
+                        .load(BASE_URL + hotel.image)
                         .into(imageHotel)
                     addressOfHotel.text = hotel.address
                     distance.text = hotel.distance.toString()
