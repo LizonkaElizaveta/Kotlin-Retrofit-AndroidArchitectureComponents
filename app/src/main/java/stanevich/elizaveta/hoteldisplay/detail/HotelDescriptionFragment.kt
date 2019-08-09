@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_hotel_list.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -67,6 +68,8 @@ class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
             nameOfHotel.text = hotel.name
             Glide.with(context!!)
                 .load(BASE_URL + hotel.image)
+                .error(Glide.with(imageHotel).load(R.drawable.ic_broken_image))
+                .apply(RequestOptions().override(1000))
                 .into(imageHotel)
             addressOfHotel.text = hotel.address
             distance.text = hotel.distance.toString()

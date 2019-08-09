@@ -27,6 +27,7 @@
                     app:layout_constraintEnd_toEndOf="parent"/>
 
             <ImageView
+                    android:src="@drawable/ic_broken_image"
                     android:id="@+id/imageHotel"
                     android:layout_width="0dp"
                     android:layout_height="266dp"

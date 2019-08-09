@@ -1,12 +1,10 @@
 package stanevich.elizaveta.hoteldisplay
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import stanevich.elizaveta.hoteldisplay.detail.OnHotelSelected
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
@@ -40,11 +38,13 @@ class RecyclerViewAdapter(var listener: OnHotelSelected? = null) :
         this.hotelPropertyList.addAll(hotelPropertyList)
     }
 
-
-    fun sort(context: Context) {
-        Toast.makeText(context, "Tetx", Toast.LENGTH_SHORT).show()
-//        hotelPropertyList.sortBy { it.distance }
-//        notifyDataSetChanged()
+    fun sort(isAsc: Boolean) {
+        if (isAsc) {
+            hotelPropertyList.sortBy { it.distance }
+        } else {
+            hotelPropertyList.sortByDescending { it.distance }
+        }
+        notifyDataSetChanged()
     }
 
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {

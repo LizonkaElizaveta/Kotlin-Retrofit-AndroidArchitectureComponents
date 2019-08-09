@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/action_all"
-            android:title="@string/without_sort"/>
+            android:id="@+id/action_asc"
+            android:title="@string/sort_by_distance_asc"/>
     <item
-            android:id="@+id/action_search"
-            android:title="@string/sort_by_distance"/>
+            android:id="@+id/action_desc"
+            android:title="@string/sort_by_distance_desc"/>
 
 </menu>

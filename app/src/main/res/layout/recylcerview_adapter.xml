@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_height="wrap_content">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="5dp">
-
-        <LinearLayout
-                android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="5dp">
 
             <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                        android:id="@+id/nameOfHotel"
+                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        tools:text="@string/nameOfHotel"/>
+                        android:layout_height="100dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
-                <TextView
-                        android:id="@+id/addressOfHotel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        tools:text="@string/addressHotel"/>
+                    <TextView
+                            android:id="@+id/nameOfHotel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            tools:text="@string/nameOfHotel"/>
 
-                <RatingBar
-                        android:id="@+id/starsOfHotel"
-                        style="?android:attr/ratingBarStyleIndicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    <TextView
+                            android:id="@+id/addressOfHotel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            tools:text="@string/addressHotel"/>
+
+                    <RatingBar
+                            android:id="@+id/starsOfHotel"
+                            style="?android:attr/ratingBarStyleIndicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
 
 
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

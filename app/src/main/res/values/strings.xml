@@ -9,4 +9,6 @@
     <string name="sort_by_distance">Sort by distance</string>
     <string name="without_sort">Show all hotel</string>
     <string name="additional_inf">Additional Information</string>
+    <string name="sort_by_distance_asc">Sort by distance ASC</string>
+    <string name="sort_by_distance_desc">Sort by distance DESC</string>
 </resources>
