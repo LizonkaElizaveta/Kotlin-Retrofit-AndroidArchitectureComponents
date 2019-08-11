@@ -12,7 +12,5 @@ data class HotelProperty(
     var distance: Float,
     var suites_availability: String,
     var image: String?
-) : Parcelable {
-
-}
+) : Parcelable
 

@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.fragment_hotel_list.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,52 +19,66 @@ import stanevich.elizaveta.hoteldisplay.databinding.FragmentHotelDescriptionBind
 import stanevich.elizaveta.hoteldisplay.network.HotelApi
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
-class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
+
+class HotelDescriptionFragment : Fragment() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private lateinit var binding: FragmentHotelDescriptionBinding
+    private lateinit var hotelProperty: HotelProperty
+
     companion object {
-        private const val BASE_URL = "https://raw.githubusercontent.com/iMofas/ios-android-test/master/"
+        private const val BUNDLE_HOTEL = "classname.hotel"
 
         fun newInstance(hotelProperty: HotelProperty): HotelDescriptionFragment {
-            return HotelDescriptionFragment(hotelProperty)
+            val hotelDescriptionFragment = HotelDescriptionFragment()
+            val args = Bundle()
+            args.putParcelable(BUNDLE_HOTEL, hotelProperty)
+            hotelDescriptionFragment.arguments = args
+            return hotelDescriptionFragment
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentHotelDescriptionBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_hotel_description, container, false)
-        binding.progressBar.show()
-        coroutineScope.launch {
-            val getPropertiesDeferred = HotelApi.retrofitService.getHotelById(hotelProperty.id)
-            try {
-                val hotel = getPropertiesDeferred.await()
-                bindResponse(binding, hotel)
-                setViewsVisible(binding)
-                progressBar.hide()
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_hotel_description, container, false)
 
-            } catch (e: Exception) {
-                Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
-                Log.e("Fail", e.message!!)
-                progressBar.hide()
-            }
-        }
+        setHotelFromArgs()
+
+        requestHotelDescription(binding)
         return binding.root
     }
 
-    private fun setViewsVisible(binding: FragmentHotelDescriptionBinding) {
-        binding.apply {
-            tvDistance.visibility = View.VISIBLE
-            tvRooms.visibility = View.VISIBLE
-            additionalInf.visibility = View.VISIBLE
-            starsOfHotel.visibility = View.VISIBLE
+    private fun setHotelFromArgs() {
+        val hotel = arguments?.getParcelable<HotelProperty>(BUNDLE_HOTEL)
+        if (hotel != null) {
+            hotelProperty = hotel
+        } else {
+            Log.e(this.javaClass.simpleName, "no hotel was provided")
+            fragmentManager?.popBackStack()
         }
     }
+
+    private fun requestHotelDescription(binding: FragmentHotelDescriptionBinding) {
+        binding.progressBar.show()
+        coroutineScope.launch {
+            try {
+                val hotel = HotelApi.retrofitService.getHotelById(hotelProperty.id)
+                bindResponse(binding, hotel)
+                binding.textDescriptionLayout.visibility = View.VISIBLE
+            } catch (e: Exception) {
+                Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
+                Log.e("Fail", e.message!!)
+            } finally {
+                binding.progressBar.hide()
+            }
+        }
+    }
+
 
     private fun bindResponse(binding: FragmentHotelDescriptionBinding, hotel: HotelProperty) {
         binding.apply {
             nameOfHotel.text = hotel.name
             Glide.with(context!!)
-                .load(BASE_URL + hotel.image)
+                .load(HotelApi.BASE_URL + hotel.image)
                 .apply(
                     RequestOptions().override(1000)
                         .placeholder(R.drawable.loading_animation)
@@ -76,6 +89,34 @@ class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
             distance.text = hotel.distance.toString()
             starsOfHotel.rating = hotel.stars
             suitesAvailability.text = hotel.suites_availability
+        }
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        var requestFromServer = false
+        if (savedInstanceState != null) {
+            val hotel = savedInstanceState.getParcelable<HotelProperty>(BUNDLE_HOTEL)
+            if (hotel != null) {
+                bindResponse(binding, hotel)
+                binding.progressBar.hide()
+            } else {
+                requestFromServer = true
+            }
+        } else {
+            requestFromServer = true
+        }
+
+        if (requestFromServer) {
+            requestHotelDescription(binding)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            putParcelable(BUNDLE_HOTEL, hotelProperty)
         }
     }
 }

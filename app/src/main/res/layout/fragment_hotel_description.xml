@@ -4,6 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <ScrollView
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -36,95 +37,98 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/backgrounds/scenic"/>
 
-            <TextView
-                    android:id="@+id/nameOfHotel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textColor="#000000"
-                    android:textSize="40sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageHotel"
-                    tools:text="@string/nameOfHotel"/>
-
-            <TextView
-
-                    app:layout_constraintTop_toBottomOf="@+id/nameOfHotel"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/addressOfHotel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="@string/addressHotel"/>
-
-            <RatingBar
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/text_description_layout"
                     android:visibility="invisible"
                     tools:visibility="visible"
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/starsOfHotel"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addressOfHotel"/>
+                    app:layout_constraintTop_toBottomOf="@id/imageHotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
-            <TextView
-                    android:textSize="24sp"
-                    android:visibility="invisible"
-                    tools:visibility="visible"
-                    android:id="@+id/additional_inf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/additional_inf"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/starsOfHotel"/>
+                <TextView
+                        android:id="@+id/nameOfHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textColor="#000000"
+                        android:textSize="40sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/nameOfHotel"/>
 
-            <TextView
-                    android:visibility="invisible"
-                    tools:visibility="visible"
-                    android:textSize="16sp"
-                    android:id="@+id/tv_rooms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suites_availability"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/additional_inf"/>
+                <TextView
 
-            <TextView
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_rooms"
-                    app:layout_constraintTop_toTopOf="@id/tv_rooms"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_rooms"
-                    android:layout_marginStart="8dp"
-                    tools:text="1,2,3,4"
-                    android:id="@+id/suites_availability"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-            />
+                        app:layout_constraintTop_toBottomOf="@+id/nameOfHotel"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/addressOfHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/addressHotel"/>
 
-            <TextView
-                    android:visibility="invisible"
-                    tools:visibility="visible"
-                    android:textSize="16sp"
-                    android:id="@+id/tv_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/distance"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_rooms"/>
+                <RatingBar
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/starsOfHotel"
+                        style="?android:attr/ratingBarStyleIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addressOfHotel"/>
 
 
-            <TextView
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_distance"
-                    app:layout_constraintTop_toTopOf="@id/tv_distance"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_distance"
-                    android:layout_marginStart="8dp"
-                    android:id="@+id/distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="198.0"/>
+                <TextView
+                        android:textSize="24sp"
+                        android:id="@+id/additional_inf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/additional_inf"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/starsOfHotel"/>
+
+                <TextView
+                        android:textSize="16sp"
+                        android:id="@+id/tv_rooms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/suites_availability"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/additional_inf"/>
+
+                <TextView
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_rooms"
+                        app:layout_constraintTop_toTopOf="@id/tv_rooms"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_rooms"
+                        android:layout_marginStart="8dp"
+                        tools:text="1,2,3,4"
+                        android:id="@+id/suites_availability"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                />
+
+                <TextView
+                        android:textSize="16sp"
+                        android:id="@+id/tv_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/distance"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_rooms"/>
+
+
+                <TextView
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_distance"
+                        app:layout_constraintTop_toTopOf="@id/tv_distance"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_distance"
+                        android:layout_marginStart="8dp"
+                        android:id="@+id/distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="198.0"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

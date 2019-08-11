@@ -28,7 +28,6 @@ class HotelListFragment : Fragment() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     companion object {
         private const val BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout"
         private const val BUNDLE_RECYCLER_LIST = "classname.recycler.list"
@@ -47,6 +46,7 @@ class HotelListFragment : Fragment() {
             recyclerview.adapter = recyclerViewAdapter
             recyclerview.layoutManager = LinearLayoutManager(activity)
         }
+
         if (context is OnHotelSelected) {
             recyclerViewAdapter.listener = context as OnHotelSelected
         } else {
@@ -54,21 +54,23 @@ class HotelListFragment : Fragment() {
                 context.toString() + " must implement OnHotelSelected."
             )
         }
+
         return binding.root
     }
 
     private fun requestHotels() {
         coroutineScope.launch {
-            val getPropertiesDeferred = HotelApi.retrofitService.getHotels(HotelApi.NAME_URL)
             try {
-                val hotel = getPropertiesDeferred.await()
-                recyclerViewAdapter.addHotelListItems(hotel)
-                recyclerViewAdapter.notifyDataSetChanged()
-                binding.progressBar.hide()
+                val hotel = HotelApi.retrofitService.getHotels(HotelApi.NAME_URL)
+                recyclerViewAdapter.apply {
+                    addHotelListItems(hotel)
+                    notifyDataSetChanged()
+                }
             } catch (e: Exception) {
-                binding.progressBar.hide()
                 Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
                 Log.e("Fail", e.message!!)
+            } finally {
+                binding.progressBar.hide()
             }
         }
     }
@@ -79,35 +81,34 @@ class HotelListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var asc = true
+        var isAsc = true
         when (item.itemId) {
-            R.id.action_asc -> asc = true
-            R.id.action_desc -> asc = false
+            R.id.action_asc -> isAsc = true
+            R.id.action_desc -> isAsc = false
         }
-        recyclerViewAdapter.sort(asc)
+        recyclerViewAdapter.sort(isAsc)
         return true
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        var requestFromServer: Boolean = false
         super.onViewStateRestored(savedInstanceState)
 
+        var requestFromServer = false
         if (savedInstanceState != null) {
             val savedRecyclerLayoutState = savedInstanceState.getParcelable<Parcelable>(BUNDLE_RECYCLER_LAYOUT)
             recyclerview.layoutManager?.onRestoreInstanceState(savedRecyclerLayoutState)
 
             val savedHotels = savedInstanceState.getParcelableArrayList<HotelProperty>(BUNDLE_RECYCLER_LIST)
-            if (savedHotels != null && savedHotels.isNotEmpty()) {
+            if (savedHotels?.isNotEmpty() == true) {
                 recyclerViewAdapter.addHotelListItems(savedHotels)
                 binding.progressBar.hide()
-
             } else {
                 requestFromServer = true
             }
-
         } else {
             requestFromServer = true
         }
+
         if (requestFromServer) {
             requestHotels()
         }
@@ -115,8 +116,11 @@ class HotelListFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerview.layoutManager?.onSaveInstanceState())
-        outState.putParcelableArrayList(BUNDLE_RECYCLER_LIST, recyclerViewAdapter.getHotels())
+        outState.apply {
+
+            putParcelable(BUNDLE_RECYCLER_LAYOUT, binding.recyclerview.layoutManager?.onSaveInstanceState())
+            putParcelableArrayList(BUNDLE_RECYCLER_LIST, recyclerViewAdapter.getHotels())
+        }
     }
 }
 

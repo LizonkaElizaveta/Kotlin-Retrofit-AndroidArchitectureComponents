@@ -29,11 +29,13 @@ class RecyclerViewAdapter(var listener: OnHotelSelected? = null) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val hotel = hotelPropertyList[position]
-        holder.tvHotelName.text = hotel.name
-        holder.tvAddressHotel.text = hotel.address
-        holder.tvStarsHotel.rating = hotel.stars
-        holder.itemView.setOnClickListener {
-            listener?.onHotelSelected(hotel)
+        holder.apply {
+            tvHotelName.text = hotel.name
+            tvAddressHotel.text = hotel.address
+            tvStarsHotel.rating = hotel.stars
+            itemView.setOnClickListener {
+                listener?.onHotelSelected(hotel)
+            }
         }
     }
 
@@ -42,10 +44,9 @@ class RecyclerViewAdapter(var listener: OnHotelSelected? = null) :
     }
 
     fun sort(isAsc: Boolean) {
-        if (isAsc) {
-            hotelPropertyList.sortBy { it.distance }
-        } else {
-            hotelPropertyList.sortByDescending { it.distance }
+        when (isAsc) {
+            true -> hotelPropertyList.sortBy { it.distance }
+            false -> hotelPropertyList.sortByDescending { it.distance }
         }
         notifyDataSetChanged()
     }
@@ -55,6 +56,4 @@ class RecyclerViewAdapter(var listener: OnHotelSelected? = null) :
         val tvAddressHotel: TextView = itemView!!.findViewById(R.id.addressOfHotel)
         val tvStarsHotel: RatingBar = itemView!!.findViewById(R.id.starsOfHotel)
     }
-
-
 }
