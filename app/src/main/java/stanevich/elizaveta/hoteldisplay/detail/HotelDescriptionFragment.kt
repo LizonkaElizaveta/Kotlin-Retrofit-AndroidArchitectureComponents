@@ -11,15 +11,18 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_hotel_list.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import stanevich.elizaveta.hoteldisplay.R
 import stanevich.elizaveta.hoteldisplay.databinding.FragmentHotelDescriptionBinding
-import stanevich.elizaveta.hoteldisplay.network.ApiHotelInterface
+import stanevich.elizaveta.hoteldisplay.network.HotelApi
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
 class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     companion object {
         private const val BASE_URL = "https://raw.githubusercontent.com/iMofas/ios-android-test/master/"
 
@@ -31,26 +34,21 @@ class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentHotelDescriptionBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_hotel_description, container, false)
-        val apiInterface = ApiHotelInterface.create()
         binding.progressBar.show()
-        apiInterface.getHotelById(hotelProperty.id).enqueue(object : Callback<HotelProperty> {
-            override fun onResponse(call: Call<HotelProperty>?, response: Response<HotelProperty>?) {
-                response?.let { res ->
-                    val hotel = res.body()
-                    hotel?.let {
-                        bindResponse(binding, it)
-                    }
-                }
+        coroutineScope.launch {
+            val getPropertiesDeferred = HotelApi.retrofitService.getHotelById(hotelProperty.id)
+            try {
+                val hotel = getPropertiesDeferred.await()
+                bindResponse(binding, hotel)
                 setViewsVisible(binding)
                 progressBar.hide()
-            }
 
-            override fun onFailure(call: Call<HotelProperty>?, t: Throwable?) {
+            } catch (e: Exception) {
                 Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
-                Log.e("Fail", t?.message!!)
+                Log.e("Fail", e.message!!)
                 progressBar.hide()
             }
-        })
+        }
         return binding.root
     }
 

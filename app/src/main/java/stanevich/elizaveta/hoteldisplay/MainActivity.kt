@@ -12,7 +12,6 @@ import stanevich.elizaveta.hoteldisplay.overview.HotelListFragment
 
 
 class MainActivity : AppCompatActivity(), OnHotelSelected {
-    lateinit var mListState: HotelListFragment
 
     override fun onHotelSelected(hotelProperty: HotelProperty) {
         val detailsFragment =
@@ -34,8 +33,6 @@ class MainActivity : AppCompatActivity(), OnHotelSelected {
                 .add(R.id.root_layout, HotelListFragment.newInstance(), "hotelList")
                 .commit()
         }
-
-
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {

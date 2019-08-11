@@ -9,14 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_hotel_list.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import stanevich.elizaveta.hoteldisplay.R
 import stanevich.elizaveta.hoteldisplay.RecyclerViewAdapter
 import stanevich.elizaveta.hoteldisplay.databinding.FragmentHotelListBinding
 import stanevich.elizaveta.hoteldisplay.detail.OnHotelSelected
-import stanevich.elizaveta.hoteldisplay.network.ApiHotelInterface
+import stanevich.elizaveta.hoteldisplay.network.HotelApi
 import stanevich.elizaveta.hoteldisplay.network.HotelProperty
 
 
@@ -24,12 +25,13 @@ class HotelListFragment : Fragment() {
     lateinit var recyclerViewAdapter: RecyclerViewAdapter
     private lateinit var binding: FragmentHotelListBinding
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
 
     companion object {
         private const val BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout"
         private const val BUNDLE_RECYCLER_LIST = "classname.recycler.list"
-
-        private const val hotelListName = "0777.json"
 
         fun newInstance(): HotelListFragment {
             return HotelListFragment()
@@ -56,22 +58,19 @@ class HotelListFragment : Fragment() {
     }
 
     private fun requestHotels() {
-        val apiInterface = ApiHotelInterface.create()
-        apiInterface.getHotels(hotelListName).enqueue(object : Callback<List<HotelProperty>> {
-            override fun onResponse(call: Call<List<HotelProperty>>?, response: Response<List<HotelProperty>>?) {
-                if (response?.body() != null) {
-                    recyclerViewAdapter.addHotelListItems(response.body()!!)
-                    recyclerViewAdapter.notifyDataSetChanged()
-                }
+        coroutineScope.launch {
+            val getPropertiesDeferred = HotelApi.retrofitService.getHotels(HotelApi.NAME_URL)
+            try {
+                val hotel = getPropertiesDeferred.await()
+                recyclerViewAdapter.addHotelListItems(hotel)
+                recyclerViewAdapter.notifyDataSetChanged()
                 binding.progressBar.hide()
-            }
-
-            override fun onFailure(call: Call<List<HotelProperty>>?, t: Throwable?) {
+            } catch (e: Exception) {
                 binding.progressBar.hide()
                 Toast.makeText(context, "Couldn't fetch data", Toast.LENGTH_SHORT).show()
-                Log.e("Fail", t?.message)
+                Log.e("Fail", e.message!!)
             }
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
