@@ -66,8 +66,11 @@ class HotelDescriptionFragment(val hotelProperty: HotelProperty) : Fragment() {
             nameOfHotel.text = hotel.name
             Glide.with(context!!)
                 .load(BASE_URL + hotel.image)
-                .error(Glide.with(imageHotel).load(R.drawable.ic_broken_image))
-                .apply(RequestOptions().override(1000))
+                .apply(
+                    RequestOptions().override(1000)
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_broken_image)
+                )
                 .into(imageHotel)
             addressOfHotel.text = hotel.address
             distance.text = hotel.distance.toString()
