@@ -14,6 +14,9 @@ class RecyclerViewAdapter(var listener: OnHotelSelected? = null) :
     RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
     private var hotelPropertyList: ArrayList<HotelProperty> = arrayListOf()
+    fun getHotels(): ArrayList<HotelProperty> {
+        return hotelPropertyList
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recylcerview_adapter, parent, false)
