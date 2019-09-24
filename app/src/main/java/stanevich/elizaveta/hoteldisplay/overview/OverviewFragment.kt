@@ -1,11 +1,12 @@
 package stanevich.elizaveta.hoteldisplay.overview
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import stanevich.elizaveta.hoteldisplay.R
 import stanevich.elizaveta.hoteldisplay.databinding.FragmentOverviewBinding
 
 class OverviewFragment : Fragment() {
@@ -31,7 +32,22 @@ class OverviewFragment : Fragment() {
             viewModel.displayPropertyDetails(it)
         })
 
+        viewModel.navigateToSelectedProperty.observe(this, Observer {
+            if (null != it) {
+                this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
+                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
+                viewModel.displayPropertyDetailsComplete()
+            }
+        })
+
+        setHasOptionsMenu(true)
+
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

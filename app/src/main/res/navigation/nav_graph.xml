@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
         app:startDestination="@id/overviewFragment">
 
     <fragment
             android:id="@+id/overviewFragment"
             android:name="stanevich.elizaveta.hoteldisplay.overview.OverviewFragment"
-            android:label="OverviewFragment">
+            android:label="fragment_overview"
+            tools:layout="@layout/fragment_overview">
         <action
-                android:id="@+id/action_overviewFragment_to_descriptionFragment"
+                android:id="@+id/action_showDetail"
                 app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
             android:id="@+id/descriptionFragment"
             android:name="stanevich.elizaveta.hoteldisplay.description.DescriptionFragment"
-            android:label="DescriptionFragment" />
+            android:label="fragment_description"
+            tools:layout="@layout/fragment_description">
+
+        <argument
+                android:name="selectedProperty"
+                app:argType="stanevich.elizaveta.hoteldisplay.network.HotelsProperty" />
+    </fragment>
 </navigation>

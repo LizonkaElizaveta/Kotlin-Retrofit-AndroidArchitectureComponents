@@ -19,29 +19,45 @@
             app:cardCornerRadius="5dp">
 
         <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-            <TextView
-                    android:id="@+id/nameOfHotel"
+            <ImageView
+                    android:id="@+id/ivPic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="16dp"
+                    app:imgUrl="@{property.imgSrcUrl}"
+                    tools:src="@drawable/ic_launcher_background" />
+
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/nameOfHotel" />
+                    android:orientation="vertical">
 
-            <TextView
-                    android:id="@+id/addressOfHotel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="@string/addressOfHotel" />
+                <TextView
+                        android:id="@+id/nameOfHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{property.name}"
+                        tools:text="@string/nameOfHotel" />
 
-            <RatingBar
-                    android:id="@+id/starsOfHotel"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <TextView
+                        android:id="@+id/addressOfHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{property.address}"
+                        tools:text="@string/addressOfHotel" />
 
+                <!--                <RatingBar-->
+                <!--                        android:id="@+id/starsOfHotel"-->
+                <!--                        style="?android:attr/ratingBarStyleIndicator"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="@{property.stars}" />-->
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

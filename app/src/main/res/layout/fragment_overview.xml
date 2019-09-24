@@ -29,6 +29,7 @@
                 app:listData="@{viewModel.properties}"
                 tools:listitem="@layout/list_view_item" />
 
+
         <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleLarge"

@@ -33,5 +33,6 @@ interface HotelsApiService {
 }
 
 object HotelApi {
+    const val NAME_URL = "0777.json"
     val retrofitService: HotelsApiService by lazy { retrofit.create(HotelsApiService::class.java) }
 }
