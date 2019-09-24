@@ -1,4 +1,10 @@
 package stanevich.elizaveta.hoteldisplay.overview
 
-class OverviewViewModel {
+import androidx.lifecycle.ViewModel
+
+class OverviewViewModel : ViewModel() {
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }
