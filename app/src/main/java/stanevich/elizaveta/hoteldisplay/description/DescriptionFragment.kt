@@ -1,4 +1,6 @@
 package stanevich.elizaveta.hoteldisplay.description
 
-class DescriptionFragment {
+import androidx.fragment.app.Fragment
+
+class DescriptionFragment : Fragment() {
 }

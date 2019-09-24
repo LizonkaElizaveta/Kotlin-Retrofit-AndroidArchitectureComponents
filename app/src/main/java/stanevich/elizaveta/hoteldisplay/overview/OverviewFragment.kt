@@ -1,4 +1,6 @@
 package stanevich.elizaveta.hoteldisplay.overview
 
-class OverviewFragment {
+import androidx.fragment.app.Fragment
+
+class OverviewFragment : Fragment() {
 }
