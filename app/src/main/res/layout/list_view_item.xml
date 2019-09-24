@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="property"
+                type="stanevich.elizaveta.hoteldisplay.network.HotelsProperty" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardCornerRadius="5dp">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/nameOfHotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/nameOfHotel" />
+
+            <TextView
+                    android:id="@+id/addressOfHotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/addressOfHotel" />
+
+            <RatingBar
+                    android:id="@+id/starsOfHotel"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

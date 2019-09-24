@@ -2,13 +2,13 @@
 <resources>
     <string name="app_name">Hotel Display</string>
     <string name="nameOfHotel">Belleclaire Hotel</string>
-    <string name="addressHotel">250 West 77th Street, Manhattan</string>
+    <string name="addressOfHotel">250 West 77th Street, Manhattan</string>
     <string name="starsOfHotel">3.0</string>
+    <string name="distanceOfHotel">145.67</string>
     <string name="suites_availability">Available rooms:</string>
+    <string name="roomsOfHotel">1,2,3,4,5</string>
     <string name="distance">Distance:</string>
-    <string name="sort_by_distance">Sort by distance</string>
-    <string name="without_sort">Show all hotel</string>
+    <string name="show_all_hotel">Show all hotel</string>
     <string name="additional_inf">Additional Information</string>
-    <string name="sort_by_distance_asc">Sort by distance ASC</string>
-    <string name="sort_by_distance_desc">Sort by distance DESC</string>
+    <string name="sort_by_distance_asc">Sort by distance</string>
 </resources>

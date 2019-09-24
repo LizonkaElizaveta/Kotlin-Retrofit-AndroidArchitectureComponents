@@ -3,9 +3,5 @@
 
     <item
             android:id="@+id/action_asc"
-            android:title="@string/sort_by_distance_asc"/>
-    <item
-            android:id="@+id/action_desc"
-            android:title="@string/sort_by_distance_desc"/>
-
+            android:title="@string/sort_by_distance_asc" />
 </menu>
