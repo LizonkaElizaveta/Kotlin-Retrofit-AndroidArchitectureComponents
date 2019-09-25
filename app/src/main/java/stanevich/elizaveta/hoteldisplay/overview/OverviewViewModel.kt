@@ -29,8 +29,8 @@ class OverviewViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun displayPropertyDetails(marsProperty: HotelsProperty) {
-        _navigateToSelectedProperty.value = marsProperty
+    fun displayPropertyDetails(hotelProperty: HotelsProperty) {
+        _navigateToSelectedProperty.value = hotelProperty
     }
 
     fun displayPropertyDetailsComplete() {

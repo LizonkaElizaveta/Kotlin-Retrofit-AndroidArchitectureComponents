@@ -21,17 +21,6 @@ class HotelAdapter(private val onClickListener: OnClickListener) :
     }
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<HotelsProperty>() {
-        override fun areItemsTheSame(oldItem: HotelsProperty, newItem: HotelsProperty): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: HotelsProperty, newItem: HotelsProperty): Boolean {
-            return oldItem.id == newItem.id
-        }
-    }
-
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -42,6 +31,8 @@ class HotelAdapter(private val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: HotelsPropertyViewHolder, position: Int) {
         val hotelsProperty = getItem(position)
+
+
         holder.itemView.setOnClickListener {
             onClickListener.onClick(hotelsProperty)
         }
@@ -51,6 +42,17 @@ class HotelAdapter(private val onClickListener: OnClickListener) :
 
     class OnClickListener(val clickListener: (hotelsProperty: HotelsProperty) -> Unit) {
         fun onClick(hotelsProperty: HotelsProperty) = clickListener(hotelsProperty)
+    }
+
+
+    companion object DiffCallback : DiffUtil.ItemCallback<HotelsProperty>() {
+        override fun areItemsTheSame(oldItem: HotelsProperty, newItem: HotelsProperty): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: HotelsProperty, newItem: HotelsProperty): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
 
 }

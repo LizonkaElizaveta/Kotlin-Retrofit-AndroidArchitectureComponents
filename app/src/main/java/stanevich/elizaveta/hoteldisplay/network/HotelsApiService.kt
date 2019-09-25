@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-private const val BASE_URL = "https://raw.githubusercontent.com/iMofas/ios-android-test/master/"
+const val BASE_URL = "https://raw.githubusercontent.com/LizonkaElizaveta/HotelDisplay/master/data/"
 
 
 private val moshi = Moshi.Builder()
