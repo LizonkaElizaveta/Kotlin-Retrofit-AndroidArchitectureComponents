@@ -20,24 +20,25 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
-            <androidx.core.widget.ContentLoadingProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:translationZ="2dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <!--            <androidx.core.widget.ContentLoadingProgressBar-->
+            <!--                    android:id="@+id/progressBar"-->
+            <!--                    style="?android:attr/progressBarStyleLarge"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:indeterminate="true"-->
+            <!--                    android:translationZ="2dp"-->
+            <!--                    android:visibility="visible"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
             <ImageView
                     android:id="@+id/imageOfHotel"
                     android:layout_width="0dp"
                     android:layout_height="266dp"
                     android:scaleType="centerCrop"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:text="@{viewModel.selectedProperty.name}"
                     android:textColor="@color/colorBlack"
                     android:textSize="40sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +61,7 @@
                     android:id="@+id/addressOfHotel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{viewModel.selectedProperty.address}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nameOfHotel"
                     tools:text="@string/addressOfHotel" />
@@ -82,7 +85,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/additional_inf"
                     android:textSize="24sp"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/starsOfHotel"
                     tools:visibility="visible" />
@@ -93,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/suites_availability"
                     android:textSize="16sp"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_additional_inf"
                     tools:visibility="visible" />
@@ -103,6 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{viewModel.selectedProperty.suites_availability.replace(':',',')}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_suites_availability"
                     app:layout_constraintStart_toEndOf="@id/tv_suites_availability"
@@ -115,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/distance"
                     android:textSize="16sp"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_suites_availability"
                     tools:visibility="visible" />
@@ -126,6 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{viewModel.selectedProperty.distance}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_distance"
                     app:layout_constraintStart_toEndOf="@id/tv_distance"

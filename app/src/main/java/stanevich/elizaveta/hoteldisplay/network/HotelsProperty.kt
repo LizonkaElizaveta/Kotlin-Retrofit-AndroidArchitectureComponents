@@ -9,7 +9,7 @@ data class HotelsProperty(
     var name: String,
     var address: String,
     var stars: Float,
-    var distance: Float,
+    var distance: String,
     var suites_availability: String,
     val imgSrcUrl: String?
 ) : Parcelable
