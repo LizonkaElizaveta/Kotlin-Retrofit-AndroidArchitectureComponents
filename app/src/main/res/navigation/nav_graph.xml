@@ -23,5 +23,8 @@
         <argument
                 android:name="selectedProperty"
                 app:argType="stanevich.elizaveta.hoteldisplay.network.HotelsProperty" />
+        <action
+                android:id="@+id/action_descriptionFragment_to_overviewFragment"
+                app:destination="@id/overviewFragment" />
     </fragment>
 </navigation>

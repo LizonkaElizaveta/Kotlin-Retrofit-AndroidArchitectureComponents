@@ -24,15 +24,4 @@ class DescriptionViewModel(hotelsProperty: HotelsProperty, app: Application) :
             it.stars.toInt()
         )
     }
-
-//    val displayPropertyStars = Transformations.map(selectedProperty) {
-//        app.applicationContext.getString(
-//            R.string.display_type,
-//            app.applicationContext.getString(
-//                when (it.isRental) {
-//                    true -> R.string.type_rent
-//                    false -> R.string.type_sale
-//                }
-//            )
-//        )
 }
