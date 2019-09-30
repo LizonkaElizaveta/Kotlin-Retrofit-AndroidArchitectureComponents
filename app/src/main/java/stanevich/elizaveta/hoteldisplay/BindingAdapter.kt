@@ -6,7 +6,6 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import stanevich.elizaveta.hoteldisplay.network.BASE_URL
 import stanevich.elizaveta.hoteldisplay.network.HotelsProperty
 import stanevich.elizaveta.hoteldisplay.overview.HotelAdapter
 
@@ -21,7 +20,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
-            .load(BASE_URL + imgUri)
+            .load(imgUri)
             .apply(
                 RequestOptions().override(1000)
                     .placeholder(R.drawable.loading_animation)

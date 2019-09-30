@@ -7,9 +7,11 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 
 const val BASE_URL = "https://raw.githubusercontent.com/LizonkaElizaveta/HotelDisplay/master/data/"
+
+enum class HotelApiFilter(val value: String) { SORT_BY_DISTANCE("distance"), SHOW_ALL("all") }
 
 
 private val moshi = Moshi.Builder()
@@ -25,11 +27,10 @@ private val retrofit = Retrofit.Builder()
 
 interface HotelsApiService {
 
-    @GET("{name}")
-    fun getHotels(@Path("name") name: String): Deferred<List<HotelsProperty>>
+    @GET("0777.json")
+    fun getHotels(@Query("filter") type: String): Deferred<List<HotelsProperty>>
 }
 
 object HotelApi {
-    const val NAME_URL = "0777.json"
     val retrofitService: HotelsApiService by lazy { retrofit.create(HotelsApiService::class.java) }
 }

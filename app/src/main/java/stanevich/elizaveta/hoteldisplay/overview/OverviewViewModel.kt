@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import stanevich.elizaveta.hoteldisplay.network.HotelApi
+import stanevich.elizaveta.hoteldisplay.network.HotelApiFilter
 import stanevich.elizaveta.hoteldisplay.network.HotelsProperty
 
 class OverviewViewModel : ViewModel() {
@@ -42,15 +43,23 @@ class OverviewViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getHotelProperties()
+        getHotelProperties(HotelApiFilter.SHOW_ALL)
     }
 
 
-    private fun getHotelProperties() {
+    private fun getHotelProperties(filter: HotelApiFilter) {
         coroutineScope.launch {
-            val getPropertiesDeferred = HotelApi.retrofitService.getHotels(HotelApi.NAME_URL)
-            _properties.value = getPropertiesDeferred.await()
+            val getPropertiesDeferred = HotelApi.retrofitService.getHotels(filter.value)
+            if (filter == HotelApiFilter.SORT_BY_DISTANCE) {
+                _properties.value = getPropertiesDeferred.await().sortedByDescending { it.distance }
+            } else {
+                _properties.value = getPropertiesDeferred.await()
+            }
         }
+    }
+
+    fun updateFilter(filter: HotelApiFilter) {
+        getHotelProperties(filter)
     }
 
 }

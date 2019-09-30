@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import stanevich.elizaveta.hoteldisplay.R
 import stanevich.elizaveta.hoteldisplay.databinding.FragmentOverviewBinding
+import stanevich.elizaveta.hoteldisplay.network.HotelApiFilter
 
 class OverviewFragment : Fragment() {
 
@@ -20,7 +21,6 @@ class OverviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         val binding = FragmentOverviewBinding.inflate(inflater)
 
@@ -49,5 +49,16 @@ class OverviewFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.updateFilter(
+            when (item.itemId) {
+                R.id.sort_by_distance -> HotelApiFilter.SORT_BY_DISTANCE
+                else -> HotelApiFilter.SHOW_ALL
+            }
+        )
+        return true
     }
 }
