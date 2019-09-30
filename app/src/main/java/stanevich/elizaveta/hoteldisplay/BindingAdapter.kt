@@ -43,5 +43,18 @@ fun bindStatus(progressBar: ProgressBar, hotelStatus: HotelApiStatus?) {
         HotelApiStatus.DONE -> {
             progressBar.visibility = View.GONE
         }
+        HotelApiStatus.ERROR -> {
+            progressBar.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter("errorImage")
+fun bindErrorImage(statusErrorImage: ImageView, hotelStatus: HotelApiStatus?) {
+    when (hotelStatus) {
+        HotelApiStatus.ERROR -> {
+            statusErrorImage.visibility = View.VISIBLE
+            statusErrorImage.setImageResource(R.drawable.ic_error_black)
+        }
     }
 }

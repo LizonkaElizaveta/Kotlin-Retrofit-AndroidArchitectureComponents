@@ -12,7 +12,7 @@ import stanevich.elizaveta.hoteldisplay.network.HotelApiFilter
 import stanevich.elizaveta.hoteldisplay.network.HotelsProperty
 
 
-enum class HotelApiStatus { LOADING, DONE }
+enum class HotelApiStatus { LOADING, DONE, ERROR }
 
 
 class OverviewViewModel : ViewModel() {
@@ -72,7 +72,7 @@ class OverviewViewModel : ViewModel() {
                     _properties.value = listResult
                 }
             } catch (e: Exception) {
-//                _status.value = HotelApiStatus.ERROR
+                _status.value = HotelApiStatus.ERROR
                 _properties.value = ArrayList()
             }
         }
