@@ -24,15 +24,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
 
                 <ImageView
                         android:id="@+id/imageOfHotel"
-                        android:layout_width="112dp"
-                        android:layout_height="112dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         app:imgUrl="@{property.image}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/imageOfHotel"
@@ -46,11 +44,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="@{property.distance}"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/distance"
                         app:layout_constraintStart_toEndOf="@id/imageOfHotel"
-                        app:layout_constraintTop_toBottomOf="@id/layout"
-                        tools:text="@string/distance" />
+                        app:layout_constraintTop_toBottomOf="@id/layout" />
 
                 <TextView
                         android:id="@+id/distanceOfHotel"
@@ -61,7 +57,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_distance"
                         app:layout_constraintStart_toEndOf="@id/tv_distance"
                         app:layout_constraintTop_toBottomOf="@id/layout"
                         tools:text="@string/distanceOfHotel" />
@@ -80,7 +76,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{property.name}"
-                            android:textSize="24sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             tools:text="@string/nameOfHotel" />
 
@@ -94,13 +90,13 @@
 
                     <RatingBar
                             android:id="@+id/starsOfHotel"
-                            style="?android:attr/ratingBarStyleIndicator"
+                            style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:rating="@{property.stars}"
-                            android:scaleX="0.6"
-                            android:scaleY="0.6"
-                            android:transformPivotX="0dp" />
+
+
+                            />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

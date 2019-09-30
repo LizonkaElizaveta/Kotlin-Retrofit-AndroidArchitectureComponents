@@ -10,5 +10,5 @@
     <string name="distance">Distance:</string>
     <string name="show_all_hotel">Show all hotel</string>
     <string name="additional_inf">Additional Information</string>
-    <string name="sort_by_distance_asc">Sort by distance</string>
+    <string name="sort_by_stars">Sort by stars</string>
 </resources>

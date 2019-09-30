@@ -62,7 +62,7 @@ class OverviewViewModel : ViewModel() {
             try {
                 _status.value = HotelApiStatus.LOADING
                 if (filter == HotelApiFilter.SORT_BY_DISTANCE) {
-                    listResult = getPropertiesDeferred.await().sortedByDescending { it.distance }
+                    listResult = getPropertiesDeferred.await().sortedByDescending { it.stars }
                     _status.value = HotelApiStatus.DONE
                     _properties.value = listResult
 

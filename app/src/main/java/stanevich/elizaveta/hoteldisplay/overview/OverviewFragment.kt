@@ -55,7 +55,7 @@ class OverviewFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         viewModel.updateFilter(
             when (item.itemId) {
-                R.id.sort_by_distance -> HotelApiFilter.SORT_BY_DISTANCE
+                R.id.sort_by_stars -> HotelApiFilter.SORT_BY_DISTANCE
                 else -> HotelApiFilter.SHOW_ALL
             }
         )
