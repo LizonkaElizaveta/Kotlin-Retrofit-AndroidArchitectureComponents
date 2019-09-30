@@ -1,6 +1,8 @@
 package stanevich.elizaveta.hoteldisplay
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import stanevich.elizaveta.hoteldisplay.network.HotelsProperty
 import stanevich.elizaveta.hoteldisplay.overview.HotelAdapter
+import stanevich.elizaveta.hoteldisplay.overview.HotelApiStatus
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<HotelsProperty>?) {
@@ -28,5 +31,17 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             )
             .into(imgView)
 
+    }
+}
+
+@BindingAdapter("status")
+fun bindStatus(progressBar: ProgressBar, hotelStatus: HotelApiStatus?) {
+    when (hotelStatus) {
+        HotelApiStatus.LOADING -> {
+            progressBar.visibility = View.VISIBLE
+        }
+        HotelApiStatus.DONE -> {
+            progressBar.visibility = View.GONE
+        }
     }
 }

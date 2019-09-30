@@ -11,6 +11,10 @@ import stanevich.elizaveta.hoteldisplay.network.HotelApi
 import stanevich.elizaveta.hoteldisplay.network.HotelApiFilter
 import stanevich.elizaveta.hoteldisplay.network.HotelsProperty
 
+
+enum class HotelApiStatus { LOADING, DONE }
+
+
 class OverviewViewModel : ViewModel() {
 
     private val _navigateToSelectedProperty = MutableLiveData<HotelsProperty>()
@@ -24,6 +28,10 @@ class OverviewViewModel : ViewModel() {
     val properties: LiveData<List<HotelsProperty>>
         get() = _properties
 
+    private val _status = MutableLiveData<HotelApiStatus>()
+
+    val status: LiveData<HotelApiStatus>
+        get() = _status
 
     override fun onCleared() {
         super.onCleared()
@@ -49,11 +57,23 @@ class OverviewViewModel : ViewModel() {
 
     private fun getHotelProperties(filter: HotelApiFilter) {
         coroutineScope.launch {
+            val listResult: List<HotelsProperty>
             val getPropertiesDeferred = HotelApi.retrofitService.getHotels(filter.value)
-            if (filter == HotelApiFilter.SORT_BY_DISTANCE) {
-                _properties.value = getPropertiesDeferred.await().sortedByDescending { it.distance }
-            } else {
-                _properties.value = getPropertiesDeferred.await()
+            try {
+                _status.value = HotelApiStatus.LOADING
+                if (filter == HotelApiFilter.SORT_BY_DISTANCE) {
+                    listResult = getPropertiesDeferred.await().sortedByDescending { it.distance }
+                    _status.value = HotelApiStatus.DONE
+                    _properties.value = listResult
+
+                } else {
+                    listResult = getPropertiesDeferred.await()
+                    _status.value = HotelApiStatus.DONE
+                    _properties.value = listResult
+                }
+            } catch (e: Exception) {
+//                _status.value = HotelApiStatus.ERROR
+                _properties.value = ArrayList()
             }
         }
     }
