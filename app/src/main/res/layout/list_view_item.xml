@@ -28,8 +28,8 @@
 
                 <ImageView
                         android:id="@+id/imageOfHotel"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="112dp"
+                        android:layout_height="112dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -40,7 +40,34 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:src="@drawable/ic_launcher_background" />
 
+
+                <TextView
+                        android:id="@+id/tv_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{property.distance}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imageOfHotel"
+                        app:layout_constraintTop_toBottomOf="@id/layout"
+                        tools:text="@string/distance" />
+
+                <TextView
+                        android:id="@+id/distanceOfHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{property.distance}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_distance"
+                        app:layout_constraintTop_toBottomOf="@id/layout"
+                        tools:text="@string/distanceOfHotel" />
+
                 <LinearLayout
+                        android:id="@+id/layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -52,26 +79,30 @@
                             android:id="@+id/nameOfHotel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="2"
                             android:text="@{property.name}"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
                             tools:text="@string/nameOfHotel" />
 
                     <TextView
                             android:id="@+id/addressOfHotel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="2"
                             android:text="@{property.address}"
+                            android:textSize="12sp"
                             tools:text="@string/addressOfHotel" />
 
                     <RatingBar
                             android:id="@+id/starsOfHotel"
                             style="?android:attr/ratingBarStyleIndicator"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:rating="@{property.stars}" />
-
+                            android:layout_height="30dp"
+                            android:rating="@{property.stars}"
+                            android:scaleX="0.6"
+                            android:scaleY="0.6"
+                            android:transformPivotX="0dp" />
                 </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

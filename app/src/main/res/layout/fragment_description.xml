@@ -20,23 +20,10 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
-            <!--            <androidx.core.widget.ContentLoadingProgressBar-->
-            <!--                    android:id="@+id/progressBar"-->
-            <!--                    style="?android:attr/progressBarStyleLarge"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:indeterminate="true"-->
-            <!--                    android:translationZ="2dp"-->
-            <!--                    android:visibility="visible"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
             <ImageView
                     android:id="@+id/imageOfHotel"
                     android:layout_width="0dp"
-                    android:layout_height="266dp"
+                    android:layout_height="270dp"
                     android:scaleType="centerCrop"
                     app:imgUrl="@{viewModel.selectedProperty.image}"
                     app:layout_constraintEnd_toEndOf="parent"
