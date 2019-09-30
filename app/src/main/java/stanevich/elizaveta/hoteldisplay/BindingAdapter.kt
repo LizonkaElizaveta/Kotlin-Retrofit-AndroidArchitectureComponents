@@ -23,10 +23,11 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         Glide.with(imgView.context)
             .load(BASE_URL + imgUri)
             .apply(
-                RequestOptions()
+                RequestOptions().override(1000)
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image)
             )
             .into(imgView)
+
     }
 }
