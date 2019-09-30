@@ -9,6 +9,6 @@
     <string name="roomsOfHotel">1,2,3,4,5</string>
     <string name="distance">Distance:</string>
     <string name="show_all_hotel">Show all hotel</string>
-    <string name="additional_inf">Additional Information</string>
+    <string name="additional_inf">Additional Information:</string>
     <string name="sort_by_stars">Sort by stars</string>
 </resources>

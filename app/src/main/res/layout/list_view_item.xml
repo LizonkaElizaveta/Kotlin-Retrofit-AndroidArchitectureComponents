@@ -89,6 +89,7 @@
                             tools:text="@string/addressOfHotel" />
 
                     <RatingBar
+                            android:progressTint="@color/colorStars"
                             android:id="@+id/starsOfHotel"
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
