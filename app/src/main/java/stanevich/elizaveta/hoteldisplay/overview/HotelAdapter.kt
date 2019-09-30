@@ -15,7 +15,6 @@ class HotelAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(hotelsProperty: HotelsProperty) {
             binding.property = hotelsProperty
-
             binding.executePendingBindings()
         }
     }

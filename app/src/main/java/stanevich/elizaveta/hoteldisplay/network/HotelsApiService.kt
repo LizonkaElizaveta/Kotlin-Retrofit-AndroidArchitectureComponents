@@ -27,9 +27,6 @@ interface HotelsApiService {
 
     @GET("{name}")
     fun getHotels(@Path("name") name: String): Deferred<List<HotelsProperty>>
-
-    @GET("{id}.json")
-    fun getHotelById(@Path("id") id: String): Deferred<HotelsProperty>
 }
 
 object HotelApi {

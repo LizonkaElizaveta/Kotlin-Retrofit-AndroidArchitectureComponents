@@ -50,17 +50,7 @@ class OverviewViewModel : ViewModel() {
         coroutineScope.launch {
             val getPropertiesDeferred = HotelApi.retrofitService.getHotels(HotelApi.NAME_URL)
             _properties.value = getPropertiesDeferred.await()
-            getNewHotelProperties()
         }
     }
-
-    private suspend fun getNewHotelProperties() {
-        _properties.value?.forEach {
-            val hotelDesc = HotelApi.retrofitService.getHotelById(it.id).await()
-            it.image = hotelDesc.image
-        }
-    }
-
-
 
 }
