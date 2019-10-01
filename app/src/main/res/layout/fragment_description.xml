@@ -23,7 +23,7 @@
             <ImageView
                     android:id="@+id/imageOfHotel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="300dp"
                     android:scaleType="centerCrop"
                     app:imgUrl="@{viewModel.selectedProperty.image}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -31,59 +31,62 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
-            <TextView
-                    android:id="@+id/nameOfHotel"
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@{viewModel.selectedProperty.name}"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="32sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/starsOfHotel"
-                    app:layout_constraintTop_toBottomOf="@+id/imageOfHotel"
-                    tools:text="@string/nameOfHotel" />
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@id/imageOfHotel"
+                    app:layout_constraintStart_toStartOf="@id/imageOfHotel"
+                    app:layout_constraintTop_toBottomOf="@id/imageOfHotel">
 
-            <!-- <android.support.constraint.Barrier
-                     android:id="@+id/barrier"
-                     app:constraint_referenced_ids = "nameOfHotel,starsOfHotel"
-                     android:layout_width="20dp"
-                     android:layout_height="wrap_content"
-                     app:barrierDirection="right" />-->
+                <TextView
+                        android:id="@+id/nameOfHotel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxLines="3"
+                        android:text="@{viewModel.selectedProperty.name}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="32sp"
+                        tools:text="@string/nameOfHotel" />
+
+
+                <RatingBar
+                        android:id="@+id/starsOfHotel"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="45dp"
+                        android:progressTint="@color/colorStars"
+                        android:rating="@{viewModel.selectedProperty.stars}"
+                        android:visibility="visible"
+                        tools:visibility="visible" />
+
+            </LinearLayout>
+
 
             <TextView
                     android:id="@+id/addressOfHotel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.selectedProperty.address}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameOfHotel"
                     android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout"
                     tools:text="@string/addressOfHotel" />
-
-            <RatingBar
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:id="@+id/starsOfHotel"
-                    android:progressTint="@color/colorStars"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:rating="@{viewModel.selectedProperty.stars}"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toEndOf="@id/nameOfHotel"
-                    app:layout_constraintTop_toTopOf="@id/nameOfHotel"
-                    tools:visibility="visible" />
 
 
             <TextView
-                    android:layout_marginTop="16dp"
-                    android:textColor="@color/colorPrimary"
                     android:id="@+id/tv_additional_inf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
                     android:text="@string/additional_inf"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
+                    android:textStyle="bold"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/addressOfHotel"
