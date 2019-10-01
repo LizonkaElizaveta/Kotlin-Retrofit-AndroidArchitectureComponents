@@ -40,8 +40,16 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="32sp"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/starsOfHotel"
                     app:layout_constraintTop_toBottomOf="@+id/imageOfHotel"
                     tools:text="@string/nameOfHotel" />
+
+            <!-- <android.support.constraint.Barrier
+                     android:id="@+id/barrier"
+                     app:constraint_referenced_ids = "nameOfHotel,starsOfHotel"
+                     android:layout_width="20dp"
+                     android:layout_height="wrap_content"
+                     app:barrierDirection="right" />-->
 
             <TextView
                     android:id="@+id/addressOfHotel"

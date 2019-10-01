@@ -11,7 +11,11 @@ import retrofit2.http.Query
 
 const val BASE_URL = "https://raw.githubusercontent.com/LizonkaElizaveta/HotelDisplay/master/data/"
 
-enum class HotelApiFilter(val value: String) { SORT_BY_DISTANCE("distance"), SHOW_ALL("all") }
+enum class HotelApiFilter(val value: String) {
+    SORT_BY_DISTANCE("distance"), SHOW_ALL("all"), SORT_BY_NAME(
+        "name"
+    )
+}
 
 
 private val moshi = Moshi.Builder()

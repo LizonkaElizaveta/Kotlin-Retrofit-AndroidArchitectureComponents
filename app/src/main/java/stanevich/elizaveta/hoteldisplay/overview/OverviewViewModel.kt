@@ -61,16 +61,19 @@ class OverviewViewModel : ViewModel() {
             val getPropertiesDeferred = HotelApi.retrofitService.getHotels(filter.value)
             try {
                 _status.value = HotelApiStatus.LOADING
-                if (filter == HotelApiFilter.SORT_BY_DISTANCE) {
-                    listResult = getPropertiesDeferred.await().sortedByDescending { it.stars }
-                    _status.value = HotelApiStatus.DONE
-                    _properties.value = listResult
-
-                } else {
-                    listResult = getPropertiesDeferred.await()
-                    _status.value = HotelApiStatus.DONE
-                    _properties.value = listResult
+                listResult = when (filter) {
+                    HotelApiFilter.SORT_BY_DISTANCE -> {
+                        getPropertiesDeferred.await().sortedByDescending { it.stars }
+                    }
+                    HotelApiFilter.SORT_BY_NAME -> {
+                        getPropertiesDeferred.await().sortedBy { it.name }
+                    }
+                    HotelApiFilter.SHOW_ALL -> {
+                        getPropertiesDeferred.await()
+                    }
                 }
+                _status.value = HotelApiStatus.DONE
+                _properties.value = listResult
             } catch (e: Exception) {
                 _status.value = HotelApiStatus.ERROR
                 _properties.value = ArrayList()

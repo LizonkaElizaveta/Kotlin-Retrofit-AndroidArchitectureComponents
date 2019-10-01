@@ -64,10 +64,11 @@
 
                 <LinearLayout
                         android:id="@+id/layout"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/imageOfHotel"
                         app:layout_constraintTop_toTopOf="@id/imageOfHotel">
 
@@ -77,6 +78,8 @@
                             android:layout_height="wrap_content"
                             android:text="@{property.name}"
                             android:textSize="18sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:textStyle="bold"
                             tools:text="@string/nameOfHotel" />
 
@@ -84,16 +87,19 @@
                             android:id="@+id/addressOfHotel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="@{property.address}"
                             android:textSize="12sp"
                             tools:text="@string/addressOfHotel" />
 
                     <RatingBar
-                            android:progressTint="@color/colorStars"
                             android:id="@+id/starsOfHotel"
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:progressTint="@color/colorStars"
                             android:rating="@{property.stars}"
 
 

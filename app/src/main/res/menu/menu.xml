@@ -4,6 +4,11 @@
     <item
             android:id="@+id/sort_by_stars"
             android:title="@string/sort_by_stars" />
+
+    <item
+            android:id="@+id/sort_by_name"
+            android:title="@string/sort_by_name" />
+
     <item
             android:id="@+id/show_all"
             android:title="@string/show_all_hotel" />

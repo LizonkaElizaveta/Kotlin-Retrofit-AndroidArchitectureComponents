@@ -56,6 +56,7 @@ class OverviewFragment : Fragment() {
         viewModel.updateFilter(
             when (item.itemId) {
                 R.id.sort_by_stars -> HotelApiFilter.SORT_BY_DISTANCE
+                R.id.sort_by_name -> HotelApiFilter.SORT_BY_NAME
                 else -> HotelApiFilter.SHOW_ALL
             }
         )
